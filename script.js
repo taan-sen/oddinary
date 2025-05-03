@@ -9,7 +9,7 @@ function checkOdd() {
   // Validate input is numeric
   if (!/^\d+$/.test(input)) {
     setTimeout(() => {
-      responseElement.textContent = 'Please enter a valid number';
+      responseElement.textContent = 'What the bloody hell is this rubbish? That ain\'t a proper fuckin\' number, you daft cunt! Looks like something a diabolical supe would shit out after too many protein shakes. You think I\'m thick enough to accept this absolute wankery? Fuck me, I\'ve seen more valid numbers scrawled on toilet walls in East End pubs. Try again before I ram this invalid garbage so far up your arse you\'ll be coughing up decimal points for a week, yeah?';
       responseElement.style.opacity = '1';
     }, 300);
     return;
@@ -23,7 +23,7 @@ function checkOdd() {
   
   // Display result with a slight delay for animation effect
   setTimeout(() => {
-    responseElement.textContent = isOdd ? 'Yes, it is odd!' : 'No, it is even.';
+    responseElement.textContent = isOdd ? 'Yeah!! It\'s odd !! ' : 'It\'s a fuckin\' even number, innit? None of that odd number bollocks. Proper divisible by two, like God and the Queen intended.';
     responseElement.style.opacity = '1';
     
     // Add a small visual effect to the background symbols
