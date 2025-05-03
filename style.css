@@ -58,11 +58,10 @@ body {
   /* Animation properties will be set individually in HTML */
 }
 
-/* Different floating animations for random directions across the whole screen */
-@keyframes floatUpRight {
+/* UPDATED: Vertical floating animations only - no diagonal movement */
+@keyframes floatUp {
   0% {
     top: 110%;
-    left: 10%;
     opacity: 0;
     transform: rotate(0deg);
   }
@@ -74,37 +73,14 @@ body {
   }
   100% {
     top: -10%;
-    left: 70%;
     opacity: 0;
     transform: rotate(360deg);
   }
 }
 
-@keyframes floatUpLeft {
-  0% {
-    top: 110%;
-    left: 80%;
-    opacity: 0;
-    transform: rotate(0deg);
-  }
-  10% {
-    opacity: 0.3;
-  }
-  90% {
-    opacity: 0.2;
-  }
-  100% {
-    top: -10%;
-    left: 20%;
-    opacity: 0;
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes floatDownRight {
+@keyframes floatDown {
   0% {
     top: -10%;
-    left: 10%;
     opacity: 0;
     transform: rotate(0deg);
   }
@@ -116,28 +92,6 @@ body {
   }
   100% {
     top: 110%;
-    left: 80%;
-    opacity: 0;
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes floatDownLeft {
-  0% {
-    top: -10%;
-    left: 80%;
-    opacity: 0;
-    transform: rotate(0deg);
-  }
-  10% {
-    opacity: 0.3;
-  }
-  90% {
-    opacity: 0.2;
-  }
-  100% {
-    top: 110%;
-    left: 10%;
     opacity: 0;
     transform: rotate(-360deg);
   }
@@ -221,26 +175,65 @@ button:active {
   transform: translateY(0);
 }
 
-/* Output */
+/* Output - UPDATED to change colors based on content */
 .response-message {
   font-size: 1.5rem;
-  color: #dc3545;
   margin-top: 1rem;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, color 0.3s;
+  /* UPDATED: Better word wrapping without breaking words */
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+  hyphens: none;
 }
 
-/* Responsive adjustments */
+/* Classes for different response types */
+.odd-response {
+  color: #28a745; /* Green color for odd numbers */
+}
+
+.even-response, .error-response {
+  color: #dc3545; /* Red color for even numbers and errors */
+}
+
+/* IMPROVED: Responsive adjustments */
 @media (max-width: 600px) {
   .container {
     width: 95%;
     padding: 1.5rem;
+    margin: 5vh auto 0 auto; /* Less top margin on mobile */
+    max-height: 90vh; /* Limit height on mobile */
+    overflow-y: auto; /* Add scroll if needed */
+  }
+  
+  .container h1 {
+    font-size: 2rem; /* Smaller heading on mobile */
   }
   
   .input-group {
     flex-direction: column;
+    width: 100%;
   }
   
   input[type="text"] {
     width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  button {
+    width: 100%;
+  }
+  
+  .response-message {
+    font-size: 1.2rem; /* Smaller response text on mobile */
+    padding: 0 0.5rem;
+    line-height: 1.4; /* Better line spacing for readability */
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  
+  /* Smaller runes on mobile */
+  .background-symbols span {
+    font-size: 1.8rem;
   }
 }
