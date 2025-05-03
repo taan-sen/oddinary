@@ -1,13 +1,94 @@
+// Function to check if number is odd
 function checkOdd() {
-  const input = document.getElementById("numberInput").value.trim();
-  const responseDiv = document.getElementById("response");
-
+  const input = document.getElementById('numberInput').value.trim();
+  const responseElement = document.getElementById('response');
+  
+  // Clear previous response
+  responseElement.style.opacity = '0';
+  
+  // Validate input is numeric
   if (!/^\d+$/.test(input)) {
-    responseDiv.textContent = "Not a f*ing number";
+    setTimeout(() => {
+      responseElement.textContent = 'Please enter a valid number';
+      responseElement.style.opacity = '1';
+    }, 300);
     return;
   }
-
-  const lastDigit = parseInt(input.slice(-1), 10);
-  const isOdd = lastDigit % 2 === 1;
-  responseDiv.textContent = isOdd ? "Hell yeah, it's odd !" : "F*ck no! It's not !";
+  
+  // Get the last digit
+  const lastDigit = input[input.length - 1];
+  
+  // Check if odd (last digit is 1, 3, 5, 7, or 9)
+  const isOdd = ['1', '3', '5', '7', '9'].includes(lastDigit);
+  
+  // Display result with a slight delay for animation effect
+  setTimeout(() => {
+    responseElement.textContent = isOdd ? 'Yes, it is odd!' : 'No, it is even.';
+    responseElement.style.opacity = '1';
+    
+    // Add a small visual effect to the background symbols
+    addTemporarySymbols(isOdd);
+  }, 300);
 }
+
+// Function to add temporary additional symbols when answer is shown
+function addTemporarySymbols(isOdd) {
+  const container = document.querySelector('.background-symbols');
+  
+  // Create 10 random temporary symbols
+  for (let i = 0; i < 10; i++) {
+    const symbol = document.createElement('span');
+    
+    // Set different runic symbols based on odd/even result
+    if (isOdd) {
+      const oddRunes = ['ᚠ', 'ᚦ', 'ᚱ', 'ᚷ', 'ᚺ', 'ᛋ', 'ᛏ', 'ᛗ', 'ᛢ', 'ᛥ'];
+      symbol.textContent = oddRunes[Math.floor(Math.random() * oddRunes.length)];
+    } else {
+      const evenRunes = ['ᚢ', 'ᚨ', 'ᚲ', 'ᚹ', 'ᛉ', 'ᛒ', 'ᛖ', 'ᛚ', 'ᛟ', 'ᛤ'];
+      symbol.textContent = evenRunes[Math.floor(Math.random() * evenRunes.length)];
+    }
+    
+    // Set truly random starting position across the full width
+    const left = Math.random() * 90 + 5;
+    symbol.style.left = `${left}%`;
+    symbol.style.fontSize = '3rem';
+    
+    // Random animation direction
+    const animations = ['floatUpRight', 'floatUpLeft', 'floatDownRight', 'floatDownLeft'];
+    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+    
+    // Set animation properties
+    symbol.style.animationName = randomAnimation;
+    symbol.style.animationDuration = (Math.random() * 10 + 15) + 's'; // 15-25 seconds
+    symbol.style.animationDelay = '0s';
+    symbol.style.animationTimingFunction = 'linear';
+    symbol.style.animationIterationCount = 'infinite';
+    
+    // Color based on odd/even - slightly darker than regular symbols
+    symbol.style.color = isOdd ? 'rgba(100, 30, 40, 0.2)' : 'rgba(30, 40, 100, 0.2)';
+    
+    // Random starting position based on the animation direction
+    if (randomAnimation === 'floatUpRight' || randomAnimation === 'floatUpLeft') {
+      symbol.style.top = (Math.random() * 50 + 50) + '%'; // 50-100% from top (bottom half)
+    } else {
+      symbol.style.top = (Math.random() * 50) + '%'; // 0-50% from top (top half)
+    }
+    
+    // Add to container
+    container.appendChild(symbol);
+    
+    // Remove after animation completes
+    setTimeout(() => {
+      if (symbol.parentNode === container) {
+        container.removeChild(symbol);
+      }
+    }, 15000);
+  }
+}
+
+// Add event listener for pressing Enter key
+document.getElementById('numberInput').addEventListener('keyup', function(event) {
+  if (event.key === 'Enter') {
+    checkOdd();
+  }
+});
