@@ -1,26 +1,75 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #f8f9fa, #e9ecef);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
+/* Background Symbols */
+.background-symbols {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.background-symbols span {
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.05);
+  animation: float 10s linear infinite;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Define keyframes for floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Container Styles */
 .container {
+  position: relative;
+  z-index: 1;
   text-align: center;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  margin: 10vh auto 0 auto; /* Positioned higher on the screen */
 }
 
-h1 {
+/* Heading Styles */
+.container h1 {
   font-size: 2.5rem;
   color: #343a40;
   margin-bottom: 1.5rem;
 }
 
+/* Input Group Styles */
 .input-group {
   display: flex;
   justify-content: center;
@@ -51,6 +100,7 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* Response Message Styles */
 .response-message {
   font-size: 1.5rem;
   color: red;
